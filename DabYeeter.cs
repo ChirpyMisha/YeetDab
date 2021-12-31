@@ -44,7 +44,7 @@ namespace YeetDab
 
 		private void YeetTheDab()
 		{
-			Plugin.Log.Notice(GetLogString("Trying to yeet the dab."));
+			Plugin.Log.Info(GetLogString("Trying to yeet the dab."));
 
 			Button soloButton = SoloButton(ref mainMenuView);
 			ButtonSpriteSwap soloSpriteSwap = soloButton?.GetComponentInChildren<ButtonSpriteSwap>() ?? null;
@@ -62,7 +62,7 @@ namespace YeetDab
 			Transform imgTrans = button?.transform.Find("Image/ImageOverlay") ?? null;
 			Image img = imgTrans?.GetComponent<Image>() ?? null;
 			if (img == null)
-				Plugin.Log.Error("Class: DabYeeter, Method: GetImageOverlayFromButton, Message: Failed to get Image from button.");
+				Plugin.Log.Error(GetLogString("Failed to get Image from button."));
 			return img;
 		}
 
