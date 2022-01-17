@@ -14,17 +14,17 @@ namespace YeetDab
 		private static FieldAccessor<ButtonSpriteSwap, Sprite>.Accessor ActiveStateSprite = FieldAccessor<ButtonSpriteSwap, Sprite>.GetAccessor("_normalStateSprite");
 		private static FieldAccessor<ButtonSpriteSwap, Sprite>.Accessor HighlightStateSprite = FieldAccessor<ButtonSpriteSwap, Sprite>.GetAccessor("_highlightStateSprite");
 
-		private MainMenuViewController mainMenuView;
+		private MainMenuViewController mainMenuViewController;
 
 		public DabYeeter(MainMenuViewController mainMenuView)
 		{
-			this.mainMenuView = mainMenuView;
+			this.mainMenuViewController = mainMenuView;
 		}
 
 		public void Initialize()
 		{
-			if (mainMenuView != null)
-				mainMenuView.didActivateEvent += MainMenuView_didActivateEvent;
+			if (mainMenuViewController != null)
+				mainMenuViewController.didActivateEvent += MainMenuView_didActivateEvent;
 			else
 				Plugin.Log.Error(GetLogString("DabYeeter failed to initialize. Reason: mainMenuView == null."));
 			
@@ -32,8 +32,8 @@ namespace YeetDab
 
 		public void Dispose()
 		{
-			if (mainMenuView != null)
-				mainMenuView.didActivateEvent -= MainMenuView_didActivateEvent;
+			if (mainMenuViewController != null)
+				mainMenuViewController.didActivateEvent -= MainMenuView_didActivateEvent;
 		}
 
 		private void MainMenuView_didActivateEvent(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -46,7 +46,7 @@ namespace YeetDab
 		{
 			Plugin.Log.Info(GetLogString("Trying to yeet the dab."));
 
-			Button soloButton = SoloButton(ref mainMenuView);
+			Button soloButton = SoloButton(ref mainMenuViewController);
 			ButtonSpriteSwap soloSpriteSwap = soloButton?.GetComponentInChildren<ButtonSpriteSwap>() ?? null;
 			Image img = GetImageOverlayFromButton(soloButton);
 
