@@ -3,9 +3,9 @@
   "id": "YeetDab",
   "name": "YeetDab",
   "author": "ChirpyMisha",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yeets the dab out of existence",
-  "gameVersion": "1.19.0",
+  "gameVersion": "1.21.0",
   "dependsOn": {
     "BSIPA": "^4.2.1",
     "SiraUtil": "^3.0.2"

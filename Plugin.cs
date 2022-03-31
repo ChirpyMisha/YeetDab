@@ -20,7 +20,7 @@ namespace YeetDab
 		{
 			Instance = this;
 			Log = logger;
-
+			
 			zenjector.Install<MenuInstaller>(Location.Menu);
 		}
 

@@ -44,16 +44,18 @@ namespace YeetDab
 
 		private void YeetTheDab()
 		{
-			Plugin.Log.Info(GetLogString("Trying to yeet the dab."));
-
 			Button soloButton = SoloButton(ref mainMenuViewController);
 			ButtonSpriteSwap soloSpriteSwap = soloButton?.GetComponentInChildren<ButtonSpriteSwap>() ?? null;
 			Image img = GetImageOverlayFromButton(soloButton);
 
 			if (soloSpriteSwap == null || img == null)
+			{
 				Plugin.Log.Error(GetLogString("Dab can't be yeeted! Reason: Failed to get all required components from the soloButton."));
-			else
-				ReplaceMenuButtonSprites(ref img, ref soloSpriteSwap, LoadSoloButtonSprites());
+				return;
+			}
+			
+			ReplaceMenuButtonSprites(ref img, ref soloSpriteSwap, LoadSoloButtonSprites());
+			Plugin.Log.Debug("DabYeeter: Successfully yeeted dab");
 
 		}
 
