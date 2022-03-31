@@ -1,10 +1,11 @@
 ﻿using IPA;
 using IPALogger = IPA.Logging.Logger;
 using SiraUtil.Zenject;
+using Zenject;
 
 namespace YeetDab
 {
-	[Plugin(RuntimeOptions.SingleStartInit)]
+	[Plugin(RuntimeOptions.SingleStartInit), NoEnableDisable]
 	public class Plugin
 	{
 		internal static Plugin Instance { get; private set; }
@@ -20,13 +21,16 @@ namespace YeetDab
 		{
 			Instance = this;
 			Log = logger;
-			
-			zenjector.Install<MenuInstaller>(Location.Menu);
+
+			zenjector.Install(Location.Menu, (DiContainer Container) =>
+			{
+				Container.BindInterfacesAndSelfTo<DabYeeter>().AsSingle();
+			});
 		}
 
-		[OnStart]
-		public void OnApplicationStart() { }
-		[OnExit]
-		public void OnApplicationQuit() { }
+		//[OnStart]
+		//public void OnApplicationStart() { }
+		//[OnExit]
+		//public void OnApplicationQuit() { }
 	}
 }

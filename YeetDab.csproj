@@ -128,9 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DabYeeter.cs" />
-    <Compile Include="MenuInstaller.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Utilities\SpriteUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

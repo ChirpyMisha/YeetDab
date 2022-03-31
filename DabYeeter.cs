@@ -4,6 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using YeetDab.Utilities;
 using Zenject;
 
 namespace YeetDab
@@ -53,9 +54,10 @@ namespace YeetDab
 				Plugin.Log.Error(GetLogString("Dab can't be yeeted! Reason: Failed to get all required components from the soloButton."));
 				return;
 			}
-			
-			ReplaceMenuButtonSprites(ref img, ref soloSpriteSwap, LoadSoloButtonSprites());
-			Plugin.Log.Debug("DabYeeter: Successfully yeeted dab");
+
+			MenuButtonSprites soloButtonSprites = LoadButtonSprites("SoloOutlineOverlay.png", "SoloNormalState.png", "SoloHighlightState.png");
+			ReplaceMenuButtonSprites(ref img, ref soloSpriteSwap, soloButtonSprites);
+			Plugin.Log.Info("DabYeeter: Successfully yeeted dab");
 
 		}
 
@@ -68,15 +70,6 @@ namespace YeetDab
 			return img;
 		}
 
-		private MenuButtonSprites LoadSoloButtonSprites()
-		{
-			Sprite soloOutlineSprite = Utilities.Utils.LoadSpriteFromResources("YeetDab.Resources.SoloOutlineOverlay.png");
-			Sprite soloDefaultBGSprite = Utilities.Utils.LoadSpriteFromResources("YeetDab.Resources.SoloNormalState.png");
-			Sprite soloHighlightedBGSprite = Utilities.Utils.LoadSpriteFromResources("YeetDab.Resources.SoloHighlightState.png");
-
-			return new MenuButtonSprites(soloOutlineSprite, soloDefaultBGSprite, soloHighlightedBGSprite);
-		}
-
 		private void ReplaceMenuButtonSprites(ref Image img, ref ButtonSpriteSwap soloSpriteSwap, MenuButtonSprites menuButtonSprites)
 		{
 			img.sprite = menuButtonSprites.OverlaySprite;
@@ -84,7 +77,13 @@ namespace YeetDab
 			HighlightStateSprite(ref soloSpriteSwap) = menuButtonSprites.HighlightStateSprite;
 		}
 
-		
+
+		internal static MenuButtonSprites LoadButtonSprites(string outlineFileName, string defaultBGFileName, string highlightedBGFileName) =>
+			new MenuButtonSprites(SpriteUtils.LoadSpriteFromResources(outlineFileName),
+								  SpriteUtils.LoadSpriteFromResources(defaultBGFileName),
+								  SpriteUtils.LoadSpriteFromResources(highlightedBGFileName)
+								  );
+
 
 		private string GetLogString(string logMessage, [CallerMemberName] string callerMethodName = "")
 		{
